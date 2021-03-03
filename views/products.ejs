@@ -1,0 +1,55 @@
+<%- include('partials/header') %> 
+
+    <!-- ***** Call to Action Start ***** -->
+    <section class="section section-bg" id="call-to-action">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    <div class="cta-content">
+                        <br>
+                        <br>
+                        <h2>Our Products</h2>
+                        <p>BEST HAND CRAFTED DRESSES JUST FOR YOU</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Call to Action End ***** -->
+
+    <!-- ***** Fleet Starts ***** -->
+    <section class="section" id="trainers">
+        <div class="container">
+            <br>
+            <br>
+
+            <div class="row">
+                <% items.forEach(function(product) { %>
+                <div class="col-lg-4">
+                    <div class="trainer-item">
+                        <div class="image-thumb">
+                            <img src="data:image/<%=product.images[0].contentType%>;base64,<%=product.images[0].data.toString('base64')%>" class="card-img-top" alt="...">
+                        </div>
+                        <div class="down-content">
+                            <span>
+                                <sup>₹</sup> <%= product.price %> 
+                            </span>
+
+                            <h4 class="soiree"><i><%= product.name %></i></h4>
+
+                            <p><%= product.description %></p>
+
+                            <ul class="social-icons">
+                                <li><a href="/product/<%=product._id %>">+ Order</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+
+        </div>
+    </section>
+    <!-- ***** Fleet Ends ***** -->
+
+<%- include('partials/footer') %> 
