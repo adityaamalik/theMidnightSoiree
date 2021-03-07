@@ -285,3 +285,42 @@ function toggleSizeChart() {
     sizeChart.style.display = "none";
   }
 }
+
+function paymentHandler() {
+  const orderId = document.getElementById("razorPayOrderId").value;
+  const options = {
+    key: "rzp_test_HWAiqohYypn3GK",
+    currency: "INR",
+    name: "The Midnight Soiree",
+    description: "Testing",
+    order_id: orderId,
+    handler: function (response) {
+      window.location.replace(
+        `/payment/${response.razorpay_order_id}/${response.razorpay_payment_id}/${response.razorpay_signature}`
+      );
+    },
+    prefill: {
+      name: "Satoshi Nakamoto",
+      email: "satoshi.nakamoto@example.com",
+      contact: "9999999999",
+    },
+    notes: {
+      address: "Delhi se Hain",
+    },
+    theme: {
+      color: "#3399cc",
+    },
+  };
+
+  let rzp1 = new Razorpay(options);
+  rzp1.on("payment.failed", function (response) {
+    alert(response.error.code);
+    alert(response.error.description);
+    alert(response.error.source);
+    alert(response.error.step);
+    alert(response.error.reason);
+    alert(response.error.metadata.order_id);
+    alert(response.error.metadata.payment_id);
+  });
+  rzp1.open();
+}

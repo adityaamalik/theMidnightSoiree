@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Payment</title>
+    </head>
+    <body>
+        <input type="hidden" value="<%= order_id %>" id="razorPayOrderId" />
+        <button onclick="paymentHandler()">Proceed to pay</button>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        <script src="/js/custom.js"></script>
+    </body>
+</html>
