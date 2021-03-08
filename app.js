@@ -145,8 +145,8 @@ app.post("/checkout", (req, res) => {
           receipt: parseInt(Math.random() * 10),
         };
 
-        instance.orders.create(options, (err, order) => {
-          res.redirect(`/payment/${order.id}`);
+        instance.orders.create(options, (err, razorPayorder) => {
+          res.redirect(`/payment/${razorPayorder.id}/${order._id}`);
         });
         console.log("Our server order");
         console.log(order);
@@ -157,14 +157,38 @@ app.post("/checkout", (req, res) => {
   }
 });
 
-app.get("/payment/:order_id", (req, res) => {
-  res.render("payment", { order_id: req.params.order_id });
+app.get("/payment/:razorpayOrder_id/:orderId", (req, res) => {
+  Order.findOne({ _id: req.params.orderId }, (err, order) => {
+    if (err) {
+      alert("Order was not created. Please try again!");
+      res.redirect("/products");
+    } else {
+      res.render("payment", {
+        razorpayOrder_id: req.params.razorpayOrder_id,
+        orderId: req.params.orderId,
+        order: order,
+      });
+    }
+  });
 });
 
-app.get("/payment/:order_id/:payment_id/:signature", (req, res) => {
-  console.log("Successful !");
-  res.redirect("/thankyou");
-});
+app.get(
+  "/thanks/:orderId/:razorpayOrderId/:payment_id/:signature",
+  (req, res) => {
+    Order.findByIdAndUpdate(
+      req.params.orderId,
+      { paymentReceived: true },
+      (err, order) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(order);
+          res.redirect("/thankyou");
+        }
+      }
+    );
+  }
+);
 
 app.listen(process.env.PORT || "3001", () => {
   console.log("Server has started!");

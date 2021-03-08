@@ -2,13 +2,74 @@
 <html>
     <head>
         <title>Payment</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+
+        <link rel="icon" href="/images/favicon.ico" type="image/gif" sizes="16x16">
+        
+        <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
-        <input type="hidden" value="<%= order_id %>" id="razorPayOrderId" />
-        <button onclick="paymentHandler()">Proceed to pay</button>
+        <div class="container mt-5">
+            <h2 style="text-align: center;">ORDER SUMMARY</h2>
+            <hr />
+            <div class="row">
+                <div class="col-lg-6 col-sm-12 mt-5">
+                    <h4>ORDER DETAILS</h4>
+                    <hr />
+                    <p>Name : <%= order.title %>. <%= order.name %></p>
+                    <p>E-mail : <%= order.email %></p>
+                    <p>Phone : <%= order.phone %></p>
+                    <p>Address 1 : <%= order.address1 %></p>
+                    <p>Address 2 : <%= order.address2 %></p>
+                    <p>City : <%= order.city %></p>
+                    <p>State : <%= order.state %></p>
+                    <p>Zip : <%= order.zip %></p>
+                </div>
+                <div class="col-lg-6 col-sm-12 mt-5">
+                    <h4>PRODUCTS</h4>
+                    <hr />
+                    <% order.orders.forEach(function(o) { %>
+                        <div class="row">
+                            <div class="col"><h6 class="mb-2 text-muted">Name : <%= o.name %></h6></div>
+                            <div class="col"><h6 class="mb-2 text-muted">Price : <%= o.price %></h6></div>
+                        </div>
+                        <div class="row">
+                            <div class="col"><h6 class="mb-2 text-muted">Size : <%= o.size %></h6></div>
+                            <div class="col"><h6 class="mb-2 text-muted">Quantity : <%= o.quantity %></h6></div>
+                        </div>
+                        <h6 class="mb-2 text-muted">Colour : <%= o.color %></h6>
+                        <hr />
+                    <% }) %>
+                    <div>
+                        <button class="btn btn-outline-dark mt-3 mb-3" onclick="paymentHandler()">Proceed to pay</button>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" value="<%= orderId %>" id="orderId" />
+            <input type="hidden" value="<%= razorpayOrder_id %>" id="razorPayOrderId" />
+            <input type="hidden" value="<%= order.email %>" id="email" />
+            <input type="hidden" value="<%= order.phone %>" id="phone" />
+            <input type="hidden" value="<%= order.name %>" id="name" />
+        </div>        
+        <!-- ***** Footer Start ***** -->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>
+                            Copyright © 2021 The Midnight Soirée
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
 
-        <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
-        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        <!-- jQuery -->
+        <script src="/js/jquery-2.1.0.min.js"></script>
+
+        <!-- Global Init -->
         <script src="/js/custom.js"></script>
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     </body>
 </html>

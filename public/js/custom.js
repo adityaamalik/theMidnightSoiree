@@ -287,25 +287,26 @@ function toggleSizeChart() {
 }
 
 function paymentHandler() {
-  const orderId = document.getElementById("razorPayOrderId").value;
+  const razorPayOrderId = document.getElementById("razorPayOrderId").value;
+  const orderId = document.getElementById("orderId").value;
+  const email = document.getElementById("email").value;
+  const phone = document.getElementById("phone").value;
+  const name = document.getElementById("name").value;
   const options = {
     key: "rzp_test_HWAiqohYypn3GK",
     currency: "INR",
     name: "The Midnight Soiree",
-    description: "Testing",
-    order_id: orderId,
+    description: "Payment for The Midnight Soiree order",
+    order_id: razorPayOrderId,
     handler: function (response) {
       window.location.replace(
-        `/payment/${response.razorpay_order_id}/${response.razorpay_payment_id}/${response.razorpay_signature}`
+        `/thanks/${orderId}/${response.razorpay_order_id}/${response.razorpay_payment_id}/${response.razorpay_signature}`
       );
     },
     prefill: {
-      name: "Satoshi Nakamoto",
-      email: "satoshi.nakamoto@example.com",
-      contact: "9999999999",
-    },
-    notes: {
-      address: "Delhi se Hain",
+      name: name,
+      email: email,
+      contact: phone,
     },
     theme: {
       color: "#3399cc",
