@@ -1401,3 +1401,8 @@ a:hover {
   font-size: 55px;
   color: black;
 }
+
+.footerBar {
+  display: inline;
+  margin-left: 1rem;
+}
