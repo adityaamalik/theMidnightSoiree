@@ -29,7 +29,9 @@
                 <div class="col-lg-6 col-sm-12 mt-5">
                     <h4>PRODUCTS</h4>
                     <hr />
+                    <% let total = 0; %> 
                     <% order.orders.forEach(function(o) { %>
+                        <% total = total + parseInt(o.price.substring(1)); %>
                         <div class="row">
                             <div class="col"><h6 class="mb-2 text-muted">Name : <%= o.name %></h6></div>
                             <div class="col"><h6 class="mb-2 text-muted">Price : <%= o.price %></h6></div>
@@ -40,8 +42,34 @@
                         </div>
                         <h6 class="mb-2 text-muted">Colour : <%= o.color %></h6>
                         <hr />
-                    <% }) %>
+                    <% }) %> 
                     <div>
+                        <div class="row">
+                            <div class="col">
+                                <h6>Total Amount : </h6>
+                            </div>
+                            <div class="col">
+                                <h6>₹ <%= total %></h6>
+                            </div>
+                        </div>
+                        <% let shippingCharges = 0; %> 
+                        <% if(total<2990) { total = total + 250; shippingCharges = 250; } %>
+                        <div class="row mt-2">
+                            <div class="col">
+                                <h6>Shipping Charges : </h6>
+                            </div>
+                            <div class="col">
+                                <h6>₹ <%= shippingCharges %></h6>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col">
+                                <h4>Grand Total : </h4>
+                            </div>
+                            <div class="col">
+                                <h4>₹ <%= total %></h4>
+                            </div>
+                        </div>
                         <button class="btn btn-outline-dark mt-3 mb-3" onclick="paymentHandler()">Proceed to pay</button>
                     </div>
                 </div>

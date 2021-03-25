@@ -91,15 +91,6 @@
 //add to cart functionality
 
 function addToCart() {
-  // use this code if hex code are needed
-  // const colors = document.getElementById("colorForm");
-  // let selectedColor;
-  // for (let i = 0; i < colors.length; i++) {
-  //   if (colors[i].checked) {
-  //     selectedColor = colors[i].value;
-  //   }
-  // }
-
   const id = document.getElementById("idOfProduct").innerText;
   const name = document.getElementById("nameOfProduct").innerText;
   const price = document.getElementById("priceOfProduct").innerText;
@@ -213,7 +204,14 @@ function loadCheckout() {
     itemsList.appendChild(li);
   });
 
-  document.getElementById("totalPrice").innerText = "₹ " + finalPrice;
+  if (finalPrice < 2990 && finalPrice > 0) {
+    finalPrice = finalPrice + 250;
+    document.getElementById("shippingCharges").innerText = "₹ 250";
+    document.getElementById("totalPrice").innerText = "₹ " + finalPrice;
+  } else {
+    document.getElementById("shippingCharges").innerText = "₹ 0";
+    document.getElementById("totalPrice").innerText = "₹ " + finalPrice;
+  }
 }
 
 function checkCart() {
@@ -293,7 +291,7 @@ function paymentHandler() {
   const phone = document.getElementById("phone").value;
   const name = document.getElementById("name").value;
   const options = {
-    key: "rzp_test_HWAiqohYypn3GK",
+    key: "rzp_test_g3UR8BvvsY18bU",
     currency: "INR",
     name: "The Midnight Soiree",
     description: "Payment for The Midnight Soiree order",

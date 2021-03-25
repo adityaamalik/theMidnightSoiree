@@ -87,6 +87,22 @@ app.get("/thankyou", (req, res) => {
   res.render("thankyou");
 });
 
+app.get("/privacystatement", (req, res) => {
+  res.render("privacystatement");
+});
+
+app.get("/termsofservice", (req, res) => {
+  res.render("termsofservice");
+});
+
+app.get("/refundpolicy", (req, res) => {
+  res.render("refundpolicy");
+});
+
+app.get("/shippingpolicy", (req, res) => {
+  res.render("shippingpolicy");
+});
+
 app.get("/product/:product_id", (req, res) => {
   Product.findOne({ _id: req.params.product_id }, (err, product) => {
     if (err) console.log(err);
@@ -118,6 +134,10 @@ app.post("/checkout", (req, res) => {
     totalAmount =
       totalAmount + parseInt(prod.price.substring(1, prod.price.length));
   });
+
+  if (totalAmount < 2990) {
+    totalAmount = totalAmount + 250;
+  }
 
   if (orderedProducts.length !== 0) {
     const order = {
