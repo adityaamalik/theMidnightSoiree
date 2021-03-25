@@ -291,7 +291,7 @@ function paymentHandler() {
   const phone = document.getElementById("phone").value;
   const name = document.getElementById("name").value;
   const options = {
-    key: "rzp_test_g3UR8BvvsY18bU",
+    key: "rzp_live_i0BKwbULGRikKq",
     currency: "INR",
     name: "The Midnight Soiree",
     description: "Payment for The Midnight Soiree order",
